@@ -1,0 +1,36 @@
+local touch_offset_x = 0
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+-- Why is this not in the standard lib?
+function math.clamp(x, min, max)
+	if x < min then return min end
+	if x > max then return max end
+	return x
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") then
+		local player_pos = go.get_position()
+		if action.pressed then
+			touch_offset_x = action.x - player_pos.x
+		end
+		local player_pos_x = -touch_offset_x + action.x
+		player_pos_x = math.clamp(player_pos_x, 0 + 16, 640 - 16)
+		go.set_position(vmath.vector3(player_pos_x, player_pos.y, player_pos.z))
+	end
+end
