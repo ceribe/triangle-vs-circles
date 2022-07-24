@@ -1,4 +1,4 @@
-script: ""
+script: "/main/gui.gui_script"
 fonts {
   name: "lato_light"
   font: "/main/lato_light.font"
@@ -44,7 +44,7 @@ nodes {
   blend_mode: BLEND_MODE_ALPHA
   text: "0"
   font: "lato_light"
-  id: "text"
+  id: "score"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER

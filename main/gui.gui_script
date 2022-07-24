@@ -1,0 +1,9 @@
+function init(self)
+	self.score_text = gui.get_node("score")
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("update_score") then
+		gui.set_text(self.score_text, message.score)
+	end
+end

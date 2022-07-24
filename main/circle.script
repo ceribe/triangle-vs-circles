@@ -38,7 +38,6 @@ end
 
 function init(self)
 	local color = getRandomColor()
-	print(color)
 	go.set("#sprite", "tint", color)
 	self.speed = vmath.vector3(
 		math.random(-100, 100), 
@@ -63,6 +62,7 @@ function update(self, dt)
 
 	if pos.y < 200 then
 		go.delete()
+		msg.post("/main_go#main", "add_point")
 	end
 end
 
