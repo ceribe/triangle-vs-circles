@@ -76,7 +76,7 @@ nodes {
   position {
     x: 320.0
     y: 200.0
-    z: 1.0
+    z: 0.9
     w: 1.0
   }
   rotation {
@@ -98,9 +98,9 @@ nodes {
     w: 1.0
   }
   color {
-    x: 0.69803923
-    y: 0.69803923
-    z: 0.69803923
+    x: 0.69411767
+    y: 0.69411767
+    z: 0.69411767
     w: 1.0
   }
   type: TYPE_BOX
@@ -108,7 +108,7 @@ nodes {
   texture: ""
   id: "box"
   xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_TOP
+  yanchor: YANCHOR_NONE
   pivot: PIVOT_N
   adjust_mode: ADJUST_MODE_FIT
   layer: ""
