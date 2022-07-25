@@ -11,6 +11,8 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("update_score") then
 		gui.set_text(self.score_text, message.score)
+	elseif message_id == hash("update_highscore") then
+		gui.set_text(self.highscore_text, "Highscore: " .. message.highscore)
 	elseif message_id == hash("game_started") then
 		gui.set_enabled(self.tap_to_start_text, false)
 		gui.set_enabled(self.highscore_text, false)
