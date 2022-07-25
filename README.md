@@ -1,21 +1,15 @@
-# Welcome to Defold
+# Triangle VS Circles
 
-This project was created from the "mobile" project template. This means that the settings in ["game.project"](defold://open?path=/game.project) have been changed to be suitable for a mobile game:
+<p float="left">
+  <img src="assets/app_icons/ss_2.png" width="250">
+  <img src="assets/app_icons/ss_1.png" width="250">
+  <img src="assets/app_icons/ss_3.png" width="250">
+</p>
 
-- The screen size is set to 640x1136
-- The projection is set to Fixed Fit
-- Orientation is fixed vertically
-- Android and iOS icons are set
-- Mouse click/single touch is bound to action "touch"
-- A simple script in a game object is set up to receive and react to input
-- Accelerometer input is turned off (for better battery life)
+# Description
 
-[Build and run](defold://build) to see it in action. You can of course alter these settings to fit your needs.
+Triangle VS Circles is a simple mobile game I made while learning Defold.
 
-Check out [the documentation pages](https://defold.com/learn) for examples, tutorials, manuals and API docs.
+# How to run
 
-If you run into trouble, help is available in [our forum](https://forum.defold.com).
-
-Happy Defolding!
-
----
+Since this is a Defold project just open it in Defold and run it from there.
