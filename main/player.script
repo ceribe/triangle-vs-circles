@@ -5,6 +5,7 @@ local touch_offset_x = 0
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
+	self.is_first_touch = true
 end
 
 function update(self, dt)
@@ -17,6 +18,7 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("collision_response") then
 		msg.post("/main_go#main", "player_died")
 		msg.post("#collisionobject", "disable")
+		self.is_first_touch = true -- Prepare for after restart
 	end
 end
 
@@ -28,13 +30,14 @@ function math.clamp(x, min, max)
 end
 
 function on_input(self, action_id, action)
-	if action_id == hash("touch") and gs.state ~= GS_PLAYER_DIED then
+	if action_id == hash("touch") and gs.state == GS_PLAYING then
 		local player_pos = go.get_position()
-		if action.pressed then
+		if action.pressed or self.is_first_touch then
 			touch_offset_x = action.x - player_pos.x
 		end
 		local player_pos_x = -touch_offset_x + action.x
 		player_pos_x = math.clamp(player_pos_x, 0 + 16, 640 - 16)
 		go.set_position(vmath.vector3(player_pos_x, player_pos.y, player_pos.z))
+		self.is_first_touch = false
 	end
 end

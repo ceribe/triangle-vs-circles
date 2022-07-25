@@ -3,27 +3,51 @@ local colors = {
 	invisible = vmath.vector4(1, 1, 1, 0)
 }
 
-function init(self)
-	self.score_text = gui.get_node("score")
-	self.highscore_text = gui.get_node("highscore")
-	self.tap_to_start_text = gui.get_node("tap_to_start")
-	self.tap_to_restart_text = gui.get_node("tap_to_restart")
+local score_text, highscore_text, tap_to_start_text, tap_to_restart_text
 
-	gui.set_color(self.score_text, colors.invisible)
-	gui.set_color(self.tap_to_restart_text, colors.invisible)
+function init(self)
+	score_text = gui.get_node("score")
+	highscore_text = gui.get_node("highscore")
+	tap_to_start_text = gui.get_node("tap_to_start")
+	tap_to_restart_text = gui.get_node("tap_to_restart")
+
+	gui.set_color(score_text, colors.invisible)
+	gui.set_color(tap_to_restart_text, colors.invisible)
+end
+
+local function set_score(new_score)
+	gui.set_text(score_text, new_score)
+end
+
+local function set_highscore(new_highscore)
+	gui.set_text(highscore_text, "Highscore\n" .. new_highscore)
+end
+
+local function on_animation_done(self, node)
+	set_score(0)
+	set_highscore(self.new_highscore)
+
+	gui.animate(tap_to_start_text, gui.PROP_COLOR, colors.white, gui.EASING_INOUTQUAD, 0.5, 0.25)
+	gui.animate(highscore_text, gui.PROP_COLOR, colors.white, gui.EASING_INOUTQUAD, 0.5, 0.25)
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("update_score") then
-		gui.set_text(self.score_text, message.score)
+		set_score(message.score)
 	elseif message_id == hash("update_highscore") then
-		gui.set_text(self.highscore_text, "Highscore: " .. message.highscore)
+		set_highscore(message.highscore)
 	elseif message_id == hash("game_started") then
-		gui.animate(self.tap_to_start_text, gui.PROP_COLOR, colors.invisible, gui.EASING_INOUTQUAD, 0.5)
-		gui.animate(self.highscore_text, gui.PROP_COLOR, colors.invisible, gui.EASING_INOUTQUAD, 0.5, 0.5)
-		gui.animate(self.score_text, gui.PROP_COLOR, colors.white, gui.EASING_INOUTQUAD, 0.5, 1)
+		gui.animate(tap_to_start_text, gui.PROP_COLOR, colors.invisible, gui.EASING_INOUTQUAD, 0.5)
+		gui.animate(highscore_text, gui.PROP_COLOR, colors.invisible, gui.EASING_INOUTQUAD, 0.5, 0.25)
+		gui.animate(score_text, gui.PROP_COLOR, colors.white, gui.EASING_INOUTQUAD, 0.5, 0.75)
 	elseif message_id == hash("game_finished") then
-		gui.animate(self.tap_to_restart_text, gui.PROP_COLOR, colors.white, gui.EASING_INOUTQUAD, 0.5, 1)
-		gui.animate(self.highscore_text, gui.PROP_COLOR, colors.white, gui.EASING_INOUTQUAD, 0.5)
+		gui.animate(tap_to_restart_text, gui.PROP_COLOR, colors.white, gui.EASING_INOUTQUAD, 0.5, 1)
+		gui.animate(highscore_text, gui.PROP_COLOR, colors.white, gui.EASING_INOUTQUAD, 0.5)
+	elseif message_id == hash("game_restarted") then
+		self.new_highscore = message.highscore
+		
+		gui.animate(tap_to_restart_text, gui.PROP_COLOR, colors.invisible, gui.EASING_INOUTQUAD, 0.5)
+		gui.animate(highscore_text, gui.PROP_COLOR, colors.invisible, gui.EASING_INOUTQUAD, 0.5)
+		gui.animate(score_text, gui.PROP_COLOR, colors.invisible, gui.EASING_INOUTQUAD, 0.5, 0.0, on_animation_done)
 	end
 end

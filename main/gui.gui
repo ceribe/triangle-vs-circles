@@ -193,7 +193,7 @@ nodes {
 nodes {
   position {
     x: 320.0
-    y: 980.0
+    y: 900.0
     z: 0.0
     w: 1.0
   }
@@ -211,7 +211,7 @@ nodes {
   }
   size {
     x: 600.0
-    y: 100.0
+    y: 140.0
     z: 0.0
     w: 1.0
   }
@@ -223,7 +223,8 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Highscore: 0"
+  text: "Highscore\n"
+  "0"
   font: "lato_light"
   id: "highscore"
   xanchor: XANCHOR_NONE
