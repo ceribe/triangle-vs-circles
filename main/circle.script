@@ -1,4 +1,5 @@
 local consts = require "constants"
+local gs = require "game_state"
 
 function hslToRgb(h, s, l)
 	h = h / 360
@@ -39,6 +40,7 @@ end
 function init(self)
 	local color = getRandomColor()
 	go.set("#sprite", "tint", color)
+	msg.post("#dynamic_collisionobject", "disable")
 	self.speed = vmath.vector3(
 		math.random(-100, 100), 
 		math.random(-200, -50), 
@@ -47,6 +49,9 @@ function init(self)
 end
 
 function update(self, dt)
+	if gs.state == GS_PLAYER_DIED then
+		msg.post("#dynamic_collisionobject", "enable")
+	end
 	local pos = go.get_position()
 	pos = pos + self.speed * dt
 
