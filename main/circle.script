@@ -41,7 +41,7 @@ function init(self)
 	local color = getRandomColor()
 	go.set("#sprite", "tint", color)
 	msg.post("#dynamic_collisionobject", "disable")
-	self.speed = vmath.vector3(math.random(-100, 100), math.random(-200, -50), 0)
+	self.speed = vmath.vector3(math.random(-100, 100), math.random(-gs.max_circle_speed, -50), 0)
 end
 
 function update(self, dt)
@@ -64,5 +64,6 @@ function update(self, dt)
 	if pos.y < 184 then
 		go.delete()
 		msg.post("/main_go#main", "add_point")
+		gs.increase_difficulty()
 	end
 end

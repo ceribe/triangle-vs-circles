@@ -35,7 +35,7 @@ function on_input(self, action_id, action)
 		msg.post("/gui#gui", "game_started")
 	elseif action_id == hash("touch") and action.pressed and gs.state == GS_PLAYER_DIED then
 		score = 0
-		gs.state = GS_BEFORE_START
+		gs.reset()
 		msg.post("/player#collisionobject", "enable")
 		msg.post("gui#gui", "game_restarted", { highscore = self.save.highscore })
 	end
