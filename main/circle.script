@@ -41,11 +41,7 @@ function init(self)
 	local color = getRandomColor()
 	go.set("#sprite", "tint", color)
 	msg.post("#dynamic_collisionobject", "disable")
-	self.speed = vmath.vector3(
-		math.random(-100, 100), 
-		math.random(-200, -50), 
-		0
-	)
+	self.speed = vmath.vector3(math.random(-100, 100), math.random(-200, -50), 0)
 end
 
 function update(self, dt)
@@ -65,14 +61,8 @@ function update(self, dt)
 	
 	go.set_position(pos)
 
-	if pos.y < 200 then
+	if pos.y < 184 then
 		go.delete()
 		msg.post("/main_go#main", "add_point")
 	end
-end
-
-function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
 end
